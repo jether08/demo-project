@@ -1,4 +1,5 @@
 import { Builder } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome.js';  
 import LoginPage from '../pages/LoginPage.js';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
@@ -11,8 +12,17 @@ const testDataPath = path.join(__dirname, 'testData.json');
 
 const testData = JSON.parse(readFileSync(testDataPath, 'utf8'));
 
+const chromeOptions = new chrome.Options();
+chromeOptions.addArguments('--headless'); // Headless mode for CI
+chromeOptions.addArguments('--no-sandbox'); // Required in CI
+chromeOptions.addArguments('--disable-dev-shm-usage'); 
+
+
 (async function testLogin() {
-  let driver = new Builder().forBrowser('chrome').build();
+  let driver = await new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(chromeOptions)
+    .build();
 
   try {
     const loginPage = new LoginPage(driver);
