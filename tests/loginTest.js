@@ -3,7 +3,7 @@ import LoginPage from '../pages/LoginPage.js';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-const testDataPath = path.join(process.cwd(), 'testData.json');
+const testDataPath = path.join(process.cwd(), 'tests', 'testData.json');
 const testData = JSON.parse(readFileSync(testDataPath, 'utf8'));
 
 (async function testLogin() {
