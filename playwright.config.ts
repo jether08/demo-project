@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { fileURLToPath } from 'url';
 import path from 'path';
 /**
  * Read environment variables from file.
@@ -11,6 +12,8 @@ import path from 'path';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
   testDir: './playwright',
   timeout: 30000,
@@ -33,7 +36,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     storageState: 'playwright/state.json'
   },
-  globalSetup: require.resolve(path.join(__dirname, 'global-setup.ts')),
+  globalSetup: path.join(__dirname, 'global-setup.ts'),
 
   /* Configure projects for major browsers */
   projects: [
