@@ -1,8 +1,10 @@
 import { Builder } from 'selenium-webdriver';
 import LoginPage from '../pages/LoginPage.js';
-import fs from 'fs';
+import { readFileSync } from 'fs';
+import path from 'path';
 
-const testData = JSON.parse(fs.readFileSync('../testData.json', 'utf-8'));
+const testDataPath = path.join(process.cwd(), 'testData.json');
+const testData = JSON.parse(readFileSync(testDataPath, 'utf8'));
 
 (async function testLogin() {
   let driver = new Builder().forBrowser('chrome').build();
