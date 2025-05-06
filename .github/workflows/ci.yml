@@ -50,7 +50,7 @@ jobs:
         run: npm ci
 
       - name: Run Selenium tests
-        run: node tests/loginTest.js
+        run: node tests/addJobTest.js
 
       - name: Upload Selenium logs
         if: always()
