@@ -1,9 +1,14 @@
 import { Builder } from 'selenium-webdriver';
 import LoginPage from '../pages/LoginPage.js';
 import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 import path from 'path';
 
-const testDataPath = path.join(process.cwd(), 'tests', 'testData.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
+
+const testDataPath = path.join(__dirname, 'testData.json');
+
 const testData = JSON.parse(readFileSync(testDataPath, 'utf8'));
 
 (async function testLogin() {
